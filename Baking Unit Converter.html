@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <title>Baking Unit Converter</title>
+
+    <style>
+    h1{
+      font-family: Arial;
+
+
+    }
+
+    table{
+      font-family: Arial, Helvetica, sans-serif;
+	  background-color: #FFF;
+	  margin: 20px auto;
+
+
+    }
+    body{
+      background-color: #d9d9d9;
+
+
+    }
+    #container{
+      margin-left: auto;
+      margin-right: auto;
+      padding: 15px;
+      width: 780px;
+      text-align: center;
+      background-color: #33cc59;
+	  border-radius: 20px;
+	  border: ridge;
+
+
+    }
+
+    .selected{
+      background-color: #CCC;
+
+
+    }
+
+
+    </style>
+
+    <script>
+	var x;
+	var y;
+	var z;
+	var items;
+	itemArray = [];
+	unitArray = [];
+	amountArray = [];
+	cupArray = [];
+	tbsArray = [];
+	tspArray = [];
+	mlArray = [];
+	flozArray = [];
+  unitFlag = [];
+  	var displayX;
+
+
+
+	start();
+
+	function start(){
+			var selection1 = 0;
+
+			while(selection1 != 1 && selection1 != 2 && selection1 != 3){
+				 selection1 = prompt("Welcome to the Baking Unit Converter. Please select an option. 1) Start converting units. 2)Display the data 3)Exit the Program.");
+
+
+			}
+				 if(selection1 == 1){
+
+					convertUnits();
+
+				} else if(selection1 == 2){
+					display();
+
+				} else if(selection1 == 3){
+					exit();
+
+
+				}
+
+
+
+	}
+
+	function convertUnits(){
+		x = 0;
+		var displayX = 1;
+		var units;
+		var amount;
+		var edit;
+
+		items = prompt("How many ingredients would you like to have?");
+		
+		while(items == "" || items == " "){
+				
+			items = prompt("please enter a proper number");	
+		}
+		
+		while(isNaN(items) == true){
+			items = prompt("please enter a proper number");	
+		}
+
+		while(x < items){
+			itemArray[x] = prompt("Please enter ingredient #"+displayX);
+
+
+					while(isNaN(itemArray[x]) == false){
+						itemArray[x] = prompt("Please enter your ingredient");
+
+					}
+
+
+				units = prompt("Please enter the unit of measurement(cup, tbs, tsp, mL and fl oz.)");
+
+				while(units != "cup" && units != "tbs" && units != "tsp" && units != "mL" && units != "fl oz."){
+
+					units = prompt("Please enter a proper unit of measurement(cup, tbs, tsp, mL and fl oz.)");
+				}
+
+
+
+			amount = prompt("Please enter how much there is of your ingredient");
+
+					while(isNaN(amount) == true){
+						amount = prompt("Please enter how much there is of your ingredient");
+
+					}
+      /*
+       unit flags: has information about which unit the user inputted
+       1 = cup
+       2 = tbs
+       3 = tsp
+       4 = ml
+       5 = fl oz.
+    */
+
+
+			if (units == "cup"){
+        		cupArray[x] = amount;
+				tbsArray[x] = amount * 16;
+				tspArray[x] = amount * 48;
+				mlArray[x] = amount * 240;
+				flozArray[x] = amount * 8;
+        		unitFlag[x] = 1;
+
+
+			} else if(units == "tbs"){
+				cupArray[x] = amount / 16;
+        		tbsArray[x] = amount;
+				tspArray[x] = amount * 3;
+				mlArray[x] = amount * 15;
+				flozArray[x] = amount / 2;
+       			unitFlag[x] = 2;
+
+
+			} else if(units == "tsp"){
+        		tspArray[x] = amount;
+				cupArray[x] = amount / 48;
+				tbsArray[x] = amount / 3;
+				mlArray[x] = amount * 5;
+				flozArray[x] = amount / 6;
+        		unitFlag[x] = 3;
+
+			} else if(units == "mL"){
+        		mlArray[x] = amount;
+				cupArray[x] = amount / 240;
+				tbsArray[x] = amount / 15;
+				tspArray[x] = amount / 5;
+				flozArray[x] = amount / 30;
+        		unitFlag[x] = 4;
+
+			} else if(units == "fl oz."){
+        		flozArray[x] = amount;
+        		tbsArray[x] = amount * 2;
+				tspArray[x] = amount * 6;
+				mlArray[x] = amount * 30;
+				cupArray[x] = amount / 8;
+        		unitFlag[x] = 5;
+
+			}
+
+
+
+
+
+			x++;
+			displayX++;
+
+			
+			
+			
+		}
+		
+					
+		edit = prompt("Would you like to edit any of the entries? (Y/N)");
+		if (edit == "y" || edit == "Y" || edit == "yes" || edit == "Yes"){
+			
+			edit1();
+			
+			
+		} else if (edit == "n" || edit == "N" || edit == "No" || edit == "no"){
+			start();
+			
+		}
+
+			
+		
+
+
+
+	}
+
+
+	
+	function edit1(){
+		
+		var amount;
+		var units;
+		var input = prompt("Which entry would you like to edit?");
+		
+			itemArray[input] = prompt("Please enter ingredient #"+input);
+
+
+					while(isNaN(itemArray[input]) == false){
+						itemArray[input] = prompt("Please enter your ingredient");
+
+					}
+
+
+				units = prompt("Please enter the unit of measurement(cup, tbs, tsp, mL and fl oz.)");
+
+				while(units != "cup" && units != "tbs" && units != "tsp" && units != "mL" && units != "fl oz."){
+
+					units = prompt("Please enter a proper unit of measurement(cup, tbs, tsp, mL and fl oz.)");
+				}
+
+
+
+			amount = prompt("Please enter how much there is of your ingredient");
+
+					while(isNaN(amount) == true){
+						amount = prompt("Please enter how much there is of your ingredient");
+
+					}
+					
+			if (units == "cup"){
+        		cupArray[input] = amount;
+				tbsArray[input] = amount * 16;
+				tspArray[input] = amount * 48;
+				mlArray[input] = amount * 240;
+				flozArray[input] = amount * 8;
+        		unitFlag[input] = 1;
+
+
+			} else if(units == "tbs"){
+				cupArray[input] = amount / 16;
+        		tbsArray[input] = amount;
+				tspArray[input] = amount * 3;
+				mlArray[input] = amount * 15;
+				flozArray[input] = amount / 2;
+       			unitFlag[input] = 2;
+
+
+			} else if(units == "tsp"){
+        		tspArray[input] = amount;
+				cupArray[input] = amount / 48;
+				tbsArray[input] = amount / 3;
+				mlArray[input] = amount * 5;
+				flozArray[input] = amount / 6;
+        		unitFlag[input] = 3;
+
+			} else if(units == "mL"){
+        		mlArray[input] = amount;
+				cupArray[input] = amount / 240;
+				tbsArray[input] = amount / 15;
+				tspArray[input] = amount / 5;
+				flozArray[input] = amount / 30;
+        		unitFlag[input] = 4;
+
+			} else if(units == "fl oz."){
+        		flozArray[input] = amount;
+        		tbsArray[input] = amount * 2;
+				tspArray[input] = amount * 6;
+				mlArray[input] = amount * 30;
+				cupArray[input] = amount / 8;
+        		unitFlag[input] = 5;
+
+			}
+
+
+		start();
+		
+		
+	}
+	
+
+	function display(){
+		x = 0;
+    document.write("<div id='container'>")
+		document.write("<h1>Baking Unit Converter</h1>");
+		document.write("<table border='1'>");
+		document.write("<tr><th>Ingredient</th><th>cup</th><th>tbs</th><th>tsp</th><th>mL</th><th>fl oz.</th></tr>");
+		while(x < items){
+      document.write("<tr>")
+
+
+			document.write("<td>"+ itemArray[x] +"</td>");
+      if(unitFlag[x] == 1){
+        document.write("<td class='selected'>"+ cupArray[x] +"</td>");
+
+
+      } else {
+        document.write("<td>"+ cupArray[x] +"</td>");
+
+      }
+
+      if(unitFlag[x] == 2){
+        document.write("<td class='selected'>"+ tbsArray[x] +"</td>");
+
+
+      } else {
+        document.write("<td>"+ tbsArray[x] +"</td>");
+
+      }
+
+
+      if(unitFlag[x] == 3){
+        document.write("<td class='selected'>"+ tspArray[x] +"</td>");
+
+
+      } else {
+        document.write("<td>"+ tspArray[x] +"</td>");
+
+      }
+
+
+      if(unitFlag[x] == 4){
+        document.write("<td class='selected'>"+ mlArray[x] +"</td>");
+
+
+      } else {
+        document.write("<td>"+ mlArray[x] +"</td>");
+
+      }
+
+      if(unitFlag[x] == 5){
+        document.write("<td class='selected'>"+ flozArray[x] +"</td>");
+
+
+      } else {
+        document.write("<td>"+ flozArray[x] +"</td>");
+
+      }
+
+
+
+
+      document.write("</tr>")
+
+
+			x++;
+		}
+
+
+		document.write("</table>");
+    document.write("</div>")
+	}
+
+	function exit(){
+		var exitSelect = prompt("Are you sure? Y/N");
+		if(exitSelect == "Y" || exitSelect == "y" || exitSelect == "yes" || exitSelect == "Yes"){
+			close();
+
+
+		} else if (exitSelect == "N" || exitSelect == "n" || exitSelect == "no" || exitSelect == "No"){
+
+			start();
+		}
+
+
+	}
+
+	</script>
+
+</head>
+
+<body>
+
+
+</body>
+
+
+</html>
